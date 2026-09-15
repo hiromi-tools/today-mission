@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>今日のミッション</title>
+<meta name="description" content="今日やることと、残り時間が一目でわかるタスク管理アプリ">
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#3A4A6E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="今日のミッション">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ============ 今日の画面 ============ -->
+  <div id="todayView">
+    <header class="app-header">
+      <div class="date" id="dateLabel">-</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-row">
+        <div class="hero-stat">
+          <div class="label">残り</div>
+          <div class="value"><span id="statRemainingCount">0</span><span class="unit">件</span></div>
+        </div>
+        <div class="hero-stat accent">
+          <div class="label">残り予定時間</div>
+          <div class="value" id="statRemainingTime">0分</div>
+        </div>
+      </div>
+      <div class="hero-progress">
+        <div class="track"><div class="fill" id="progressFill" style="width:0%"></div></div>
+        <div class="caption"><span id="statDoneCount">0</span> / <span id="statTotalCount">0</span> 件 完了</div>
+      </div>
+    </section>
+
+    <div class="cat-scroll" id="catBreakdown"></div>
+
+    <div class="section-label">今日のタスク <span class="count" id="pendingCountLabel"></span></div>
+    <div class="task-list" id="pendingList"></div>
+    <div id="pendingEmpty" class="empty-state" style="display:none;">今日のタスクはすべて終わりました。<br>右下の + から明日の分を追加できます。</div>
+
+    <div class="section-label" id="doneSectionLabel" style="display:none;">今日できたこと <span class="count" id="doneCountLabel"></span></div>
+    <div class="task-list" id="doneList"></div>
+
+    <div class="spacer-bottom"></div>
+  </div>
+
+  <button class="fab" id="addTaskFab" aria-label="タスクを追加">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+  </button>
+
+</div>
+
+<!-- ============ overlay ============ -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ============ タスク追加シート ============ -->
+<div class="sheet" id="taskSheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header" id="taskSheetTitle">タスクを追加</div>
+  <div class="sheet-body">
+    <div class="field">
+      <label for="taskNameInput">タスク名</label>
+      <input type="text" id="taskNameInput" placeholder="例）洗濯物をたたむ" maxlength="40">
+    </div>
+    <div class="field">
+      <label>カテゴリ</label>
+      <div class="chip-row" id="taskCategoryChips"></div>
+    </div>
+    <div class="field">
+      <label>所要時間</label>
+      <div class="chip-row" id="taskDurationChips"></div>
+      <div class="duration-custom">
+        <input type="number" id="taskDurationCustom" min="1" max="600" placeholder="自由入力">
+        <span>分</span>
+      </div>
+    </div>
+    <button class="primary-btn" id="taskSaveBtn">追加する</button>
+    <button class="text-btn" id="taskCancelBtn">キャンセル</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
