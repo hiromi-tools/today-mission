@@ -28,6 +28,9 @@
   <div id="todayView">
     <header class="app-header">
       <div class="date" id="dateLabel">-</div>
+      <button class="icon-btn" id="openSettingsBtn" aria-label="固定タスク設定を開く">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      </button>
     </header>
 
     <section class="hero">
@@ -63,6 +66,20 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
   </button>
 
+  <!-- ============ 固定タスク設定画面 ============ -->
+  <div class="screen" id="settingsScreen">
+    <div class="screen-header">
+      <button class="icon-btn" id="closeSettingsBtn" aria-label="閉じる">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+      </button>
+      <h1>固定タスク設定</h1>
+    </div>
+    <div class="screen-body" id="recurringList"></div>
+    <button class="fab" id="addRecurringFab" aria-label="固定タスクを追加">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+    </button>
+  </div>
+
 </div>
 
 <!-- ============ overlay ============ -->
@@ -91,6 +108,40 @@
     </div>
     <button class="primary-btn" id="taskSaveBtn">追加する</button>
     <button class="text-btn" id="taskCancelBtn">キャンセル</button>
+  </div>
+</div>
+
+<!-- ============ 固定タスク追加/編集シート ============ -->
+<div class="sheet" id="recurringSheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header" id="recurringSheetTitle">固定タスクを追加</div>
+  <div class="sheet-body">
+    <div class="field">
+      <label for="recurringNameInput">タスク名</label>
+      <input type="text" id="recurringNameInput" placeholder="例）ゴミ出し" maxlength="40">
+    </div>
+    <div class="field">
+      <label>カテゴリ</label>
+      <div class="chip-row" id="recurringCategoryChips"></div>
+    </div>
+    <div class="field">
+      <label>所要時間</label>
+      <div class="chip-row" id="recurringDurationChips"></div>
+      <div class="duration-custom">
+        <input type="number" id="recurringDurationCustom" min="1" max="600" placeholder="自由入力">
+        <span>分</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>曜日</label>
+      <div class="chip-row" style="margin-bottom:8px;">
+        <button type="button" class="chip-btn" id="everydayToggle">毎日</button>
+      </div>
+      <div class="day-grid" id="dayGrid"></div>
+    </div>
+    <button class="primary-btn" id="recurringSaveBtn">保存する</button>
+    <button class="text-btn danger-btn" id="recurringDeleteBtn" style="display:none;">この固定タスクを削除</button>
+    <button class="text-btn" id="recurringCancelBtn">キャンセル</button>
   </div>
 </div>
 
